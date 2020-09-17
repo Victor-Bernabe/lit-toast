@@ -104,15 +104,16 @@ class LitToast extends LitElement {
     this.style.setProperty('aria-relevant', 'all');
   }
 
-  show(text = '') {
+  show(text = '', time = 3000) {
     if (this.className === 'show') {
       // Do nothing, prevent spamming
     } else {
       this._toastText = text;
       this.className = 'show';
       setTimeout(() => {
-        this.className = this.className.replace('show', '');
-      }, 3000);
+				this.className = this.className.replace('show', '');
+				this.dispatchEvent(new Event('closed'));
+      }, time);
     }
   }
 }
